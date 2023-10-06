@@ -1,6 +1,20 @@
-import React from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+
 
 const Register = () => {
+    const {createUser}=useContext(AuthContext)
+    const handleRegister =(event)=>{
+        event.preventDefault();
+        const form=event.target;
+        const email=form.email.value;
+        const password=form.password.value;
+        console.log(email,password);
+        createUser(email,password)
+        .th
+
+        
+    }
     return (
         <div>
             <div className="hero min-h-screen bg-fuchsia-300">
@@ -9,8 +23,8 @@ const Register = () => {
                         <h1 className="text-5xl font-bold">Login now!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
-                    <div className="card w-full max-w-sm shadow-2xl bg-fuchsia-800">
-                        <form className="card-body" >
+                    <div className="card w-[500px] mx-auto shadow-2xl bg-fuchsia-800">
+                        <form className="card-body" onSubmit={handleRegister} >
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
