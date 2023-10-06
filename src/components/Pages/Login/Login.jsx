@@ -1,14 +1,19 @@
-import React, { createContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
-    const {signIn}=createContext(AuthContext)
+    const {signIn}=useContext(AuthContext)
     const handleLogin=(event)=>{
         event.preventDefault();
         const form=event.target;
         const email=form.email.value;
         const password=form.password.value;
-        signIn(email,)
+        console.log(email,password);
+        signIn(email,password)
+        .then(result=>{
+            const loggedUser=result.user;
+            console.log(loggedUser);
+        })
     }
     return (
         <div>
@@ -37,6 +42,9 @@ const Login = () => {
                         
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Login</button>
+                            </div>
+                            <div className='form-control mt-6'>
+                                <button className='btn bg-pink-300'>Google</button>
                             </div>
                         </form>
                     </div>
