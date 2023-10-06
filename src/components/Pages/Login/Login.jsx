@@ -1,26 +1,14 @@
-import { useContext } from 'react';
+import React, { createContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 
-
-
-const Register = () => {
-    const {createUser}=useContext(AuthContext)
-    const handleRegister =(event)=>{
+const Login = () => {
+    const {signIn}=createContext(AuthContext)
+    const handleLogin=(event)=>{
         event.preventDefault();
         const form=event.target;
         const email=form.email.value;
         const password=form.password.value;
-        console.log(email,password);
-        createUser(email,password)
-        .then(result=>{
-            console.log(result.user); 
-        })
-        .catch(error=>{
-            console.log(error);
-        })
-            
-
-        
+        signIn(email,)
     }
     return (
         <div>
@@ -31,13 +19,8 @@ const Register = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className="card w-[500px] mx-auto shadow-2xl bg-fuchsia-800">
-                        <form className="card-body" onSubmit={handleRegister} >
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text" placeholder="Enter Your Name" className="input input-bordered" required  name='name'/>
-                            </div>
+                        <form className="card-body" onSubmit={handleLogin} >
+                          
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -50,20 +33,10 @@ const Register = () => {
                                 </label>
                                 <input type="password" placeholder="password" className="input input-bordered" required name='password'/>
                             </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Confirm Password</span>
-                                </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required name='confirm-password'/>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Image Url</span>
-                                </label>
-                                <input type="text" placeholder="password" className="input input-bordered" required name='image' />
-                            </div>
+                            
+                        
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Sign In</button>
+                                <button className="btn btn-primary">Login</button>
                             </div>
                         </form>
                     </div>
@@ -73,4 +46,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default Login;

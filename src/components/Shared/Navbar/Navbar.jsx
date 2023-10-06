@@ -18,6 +18,7 @@ const Navbar = () => {
               <Link to={"/addJewellery"}>Add Jewellery</Link>
               <Link to={"/blog"}>Blog</Link>
               <Link to={"/register"}>Register</Link>
+              <Link to={"/login"}>Login</Link>
 
             </ul>
           </div>
@@ -31,6 +32,7 @@ const Navbar = () => {
             <Link to={"/addJewellery"}>Add Jewellery</Link>
             <Link to={"/blog"}>Blog</Link>
             <Link to={"/register"}>Register</Link>
+            <Link to={"/login"}>Login</Link>
 
 
           </ul>
