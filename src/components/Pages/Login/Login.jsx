@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import { Icon } from '@iconify/react';
 
 const Login = () => {
-    const {signIn}=useContext(AuthContext)
+    const {signIn,googleSignIn}=useContext(AuthContext)
     const handleLogin=(event)=>{
         event.preventDefault();
         const form=event.target;
@@ -14,6 +15,11 @@ const Login = () => {
             const loggedUser=result.user;
             console.log(loggedUser);
         })
+    }
+    const handleGoogleSignIn=()=>{
+        googleSignIn()
+        .then(result=>{})
+        .catch(error=>{})
     }
     return (
         <div>
@@ -43,8 +49,10 @@ const Login = () => {
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Login</button>
                             </div>
-                            <div className='form-control mt-6'>
-                                <button className='btn bg-pink-300'>Google</button>
+                           <p className='text-center mt-1 text-white'>Or</p>
+                            <div onClick={handleGoogleSignIn} className='form-control mt-1'>
+                            
+                                <button className='btn bg-violet-300'><Icon className='text-3xl' icon="flat-color-icons:google" />Google</button>
                             </div>
                         </form>
                     </div>
