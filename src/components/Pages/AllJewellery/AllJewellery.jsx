@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
+import SingleJewellery from './SingleJewellery';
 
 const AllJewellery = () => {
     const [jewellerys, setJewellerys] = useState([])
@@ -17,30 +17,19 @@ const AllJewellery = () => {
         })
         .catch(error => {
             // Handle any errors that occur
-            console.error('Error:', error);
+            // console.error('Error:', error);
         });
 
 
 
     return (
         <div>
+            <div>
+                <h1 className='text-center text-3xl text-cyan-700 my-10'>Our All Jewellerey</h1>
+            </div>
             <div className='grid grid-cols-2 w-11/12 mx-auto'>
                 {
-                    jewellerys.map(jewellery =>
-                        <div key={jewellery._id} >
-                            <div className='flex'>
-                                <div>
-                                    <img className='w-72 h-72' src={jewellery.image} alt="" />
-                                </div>
-                                <div className='m-10'>
-                                    <h1 className='text-3xl'>{jewellery.name}</h1>
-                                    <h1 className='text-xl text-fuchsia-500 mt-4'>{jewellery.description}</h1>
-                                    <p className='text-xl fw-bold mt-6'>Price : {jewellery.price}$</p>
-                                    <button className='btn bg-fuchsia-700 bottom-0 mt-10 '><Icon className='text-xl' icon="fluent:cart-24-filled" />Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    )
+                    jewellerys.map(jewellery=><SingleJewellery key={jewellery._id} jewellery={jewellery}></SingleJewellery>)
                 }
             </div>
         </div>

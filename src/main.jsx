@@ -9,6 +9,7 @@ import AuthProvider from './components/providers/AuthProvider';
 import Login from './components/Pages/Login/Login';
 import Addjewellery from './components/DashBoard/AddJewellery';
 import AllJewellery from './components/Pages/AllJewellery/AllJewellery';
+import MyJewellary from './components/Pages/MyJewellary/MyJewellary';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/alljewellery",
         element:<AllJewellery></AllJewellery>,
+      },
+      {
+        path: "/myjewellery",
+        element:<MyJewellary></MyJewellary>
       },
     ]
   },
