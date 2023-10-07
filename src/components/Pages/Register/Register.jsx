@@ -1,26 +1,56 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import { saveUser } from '../../../api/auth';
 
 
 
 const Register = () => {
-    const {createUser}=useContext(AuthContext)
-    const handleRegister =(event)=>{
+    const { createUser } = useContext(AuthContext)
+    const handleRegister = (event) => {
         event.preventDefault();
-        const form=event.target;
-        const email=form.email.value;
-        const password=form.password.value;
-        console.log(email,password);
-        createUser(email,password)
-        .then(result=>{
-            console.log(result.user); 
-        })
-        .catch(error=>{
-            console.log(error);
-        })
-            
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        const data = { email };
+        createUser(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
 
-        
+                    //     fetch('http://localhost:5000/alljewellery ', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'content-type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(newJewellery)
+                    // })
+                    //     .then(res => res.json())
+
+
+                    .then(data => {
+                        console.log(data);
+                    })
+
+                //    
+                //     
+                //    save user data 
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
+
     }
     return (
         <div>
@@ -36,25 +66,25 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" placeholder="Enter Your Name" className="input input-bordered" required  name='name'/>
+                                <input type="text" placeholder="Enter Your Name" className="input input-bordered" required name='name' />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="Enter Your Email" className="input input-bordered" required  name='email' />
+                                <input type="email" placeholder="Enter Your Email" className="input input-bordered" required name='email' />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required name='password'/>
+                                <input type="password" placeholder="password" className="input input-bordered" required name='password' />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required name='confirm-password'/>
+                                <input type="password" placeholder="password" className="input input-bordered" required name='confirm-password' />
                             </div>
                             <div className="form-control">
                                 <label className="label">
