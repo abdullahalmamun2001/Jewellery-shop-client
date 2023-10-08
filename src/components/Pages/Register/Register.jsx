@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-import { saveUser } from '../../../api/auth';
+import axios from 'axios';
 
 
 
@@ -12,37 +12,23 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
-        const data = { email };
-        createUser(email, password)
-            .then(result => {
+        
+        const data =  {email,role:"user"};
+        createUser(email, password).then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                fetch('http://localhost:5000/user', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
+               
+
+                axios.post('http://localhost:5000/user',
+                    data
+                )
+                .then(res =>{
+
+                       console.log(res.data);
                 })
-                    .then(res => res.json())
+                  
+                    
 
-                    //     fetch('http://localhost:5000/alljewellery ', {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'content-type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(newJewellery)
-                    // })
-                    //     .then(res => res.json())
-
-
-                    .then(data => {
-                        console.log(data);
-                    })
-
-                //    
-                //     
-                //    save user data 
 
             })
             .catch(error => {
@@ -93,7 +79,7 @@ const Register = () => {
                                 <input type="text" placeholder="password" className="input input-bordered" required name='image' />
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Sign In</button>
+                                <button type='submit' className="btn btn-primary">Sign In</button>
                             </div>
                         </form>
                     </div>

@@ -16,17 +16,17 @@ const AuthProvider = ({children}) => {
 
     const createUser=(email,password)=>{
         setLoading(true);
-        createUserWithEmailAndPassword(auth,email,password)
+       return createUserWithEmailAndPassword(auth,email,password)
     }
 
     const signIn=(email,password)=>{
         setLoading(true);
-        signInWithEmailAndPassword(auth,email,password)
+       return signInWithEmailAndPassword(auth,email,password)
     }
 
     const googleSignIn=()=>{
         setLoading(true)
-        signInWithPopup(auth,provider);
+      return  signInWithPopup(auth,provider);
     }
 
     const logOut = () => {

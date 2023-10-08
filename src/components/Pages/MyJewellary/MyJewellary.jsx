@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const MyJewellary = () => {
 
@@ -21,7 +22,24 @@ const MyJewellary = () => {
 
   const handleDelete = (id) => {
     console.log(id);
+
+    axios.delete(`http://localhost:5000/myjewellarydelete/${id}`)
+      .then(res => {
+        console.log(res.data);
+        if (res.data.deletedCount > 0) {
+
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Remove The Item Of Your Cart',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
+
   }
+
 
   return (
     <div>
@@ -44,7 +62,7 @@ const MyJewellary = () => {
                 <th>{index + 1}</th>
                 <td><img className='h-10 w-10 rounded-full' src={singleData.image} alt="" /></td>
                 <td>{singleData.name}</td>
-                <td>{singleData.price}</td>
+                <td>{singleData.price}$</td>
                 <td onClick={() => { handleDelete(singleData._id) }} className='btn btn-primary'>Delete</td>
               </tr>)
             }

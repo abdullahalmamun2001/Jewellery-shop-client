@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Icon } from '@iconify/react';
 import { saveUser } from '../../../api/auth';
+import axios from 'axios';
 
 const Login = () => {
     const { signIn, googleSignIn } = useContext(AuthContext)
@@ -20,19 +21,20 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
+                const loggedUser=result.user;
+                const email=loggedUser.email;
+                const name=loggedUser.displayName;
+                
+                const data={email,name,role:"user"}
                 // save user information
 
-                fetch(`http://localhost:5000/user/${result.user.email}`, {
-                    method: "PUT",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify({email:result.user.email})
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                    })
+                axios.post('http://localhost:5000/user',
+                data
+            )
+            .then(res =>{
+
+                   console.log(res.data);
+            })
             })
             .catch(error => { })
     }
