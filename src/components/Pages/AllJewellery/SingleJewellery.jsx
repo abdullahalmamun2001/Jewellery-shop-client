@@ -35,7 +35,7 @@ const SingleJewellery = ({ jewellery }) => {
     return (
         <div className='flex'>
             <div>
-                <img className='w-72 h-72' src={jewellery.image} alt="" />
+                <img className='w-72 h-72 rounded-md hover:scale-125 duration-100' src={jewellery.image} alt="" />
             </div>
             <div className='m-10'>
                 <h1 className='text-3xl'>{jewellery.name}</h1>
