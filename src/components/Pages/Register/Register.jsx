@@ -5,32 +5,40 @@ import axios from 'axios';
 
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
     const handleRegister = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        const name = form.name.value;
+        const image = form.image.value;
         console.log(email, password);
-        
-        const data =  {email,role:"user"};
+
+
         createUser(email, password).then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-               
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            updateUserProfile(name,image)
+                .then(result => {
+                    const data = { email, role: "user", name: name
+                    , photo: image };
+                    axios.post('http://localhost:5000/user',
+                        data
+                    )
+                        .then(res => {
 
-                axios.post('http://localhost:5000/user',
-                    data
-                )
-                .then(res =>{
-
-                       console.log(res.data);
+                            console.log(res.data);
+                        })
                 })
-                  
-                    
 
 
-            })
+
+
+
+
+
+        })
             .catch(error => {
                 console.log(error);
             })

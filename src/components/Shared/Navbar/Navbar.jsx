@@ -22,7 +22,7 @@ const Navbar = () => {
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 
               
-              <Link to={"/home"}>Home</Link>
+              <Link className='m-7' to={"/home"}>Home</Link>
               <Link to={"/allJewellery"}>All Jewellery</Link>
               <Link to={"/myJewellery"}>My Jewellery</Link>
               <Link to={"/addJewellery"}>Add Jewellery</Link>
@@ -38,14 +38,14 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <Link to={"/"}>Home</Link>
-            <Link to={"/allJewellery"}>All Jewellery</Link>
-            <Link to={"/myJewellery"}>My Jewellery</Link>
-            <Link to={"/addJewellery"}>Add Jewellery</Link>
-            <Link to={"/blog"}>Blog</Link>
-            <Link to={"/register"}>Register</Link>
+            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/"}>Home</Link>
+            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/allJewellery"}>All Jewellery</Link>
+            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/myJewellery"}>My Jewellery</Link>
+            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/addJewellery"}>Add Jewellery</Link>
+            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/blog"}>Blog</Link>
+            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/register"}>Register</Link>
             {
-              user? <Link onClick={handleLogOut}>logOut</Link>: <Link to={"/login"}>Login</Link>
+              user? "": <Link className='px-4 pt-3 text-lg fw-bold text-white' to={"/login"}>Login</Link>
              }
 
 
@@ -59,7 +59,11 @@ const Navbar = () => {
               </div>
             </label>
             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-              <li><a>Logout</a></li>
+              <li>
+              {
+                user? <Link onClick={handleLogOut}>logOut</Link>: "" 
+              }
+              </li>
             </ul>
           </div>
         </div>
