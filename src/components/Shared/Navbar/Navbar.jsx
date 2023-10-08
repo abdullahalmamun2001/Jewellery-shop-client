@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../providers/AuthProvider';
+// import useAdminSecure from '../../../hooks/UseAdminSecure';
 
 const Navbar = () => {
-  const {user,logOut}=useContext(AuthContext)
+  const {user,logOut}=useContext(AuthContext);
+  // const [isAdmin,isAdminLoading]=useAdminSecure();
+  
   const handleLogOut=()=>{
     logOut()
     .then(result=>{})
@@ -18,7 +21,8 @@ const Navbar = () => {
             </label>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 
-              <Link to={"/"}>Home</Link>
+              
+              <Link to={"/home"}>Home</Link>
               <Link to={"/allJewellery"}>All Jewellery</Link>
               <Link to={"/myJewellery"}>My Jewellery</Link>
               <Link to={"/addJewellery"}>Add Jewellery</Link>
