@@ -15,7 +15,7 @@ const SingleJewellery = ({ jewellery }) => {
         console.log(cartData);
 
 
-        axios.post('http://localhost:5000/myjewellary', cartData)
+        axios.post('https://demo-theta-sepia.vercel.app/myjewellary', cartData)
             .then(response => {
                 console.log('POST Response:', response.data.insertedId);
                 if(response.data.insertedId){

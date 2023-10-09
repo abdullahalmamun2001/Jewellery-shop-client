@@ -10,7 +10,7 @@ const MyJewellary = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     // Perform the Axios GET request to fetch data
-    axios.get(`http://localhost:5000/myjewellary/${user?.email}`)
+    axios.get(`https://demo-theta-sepia.vercel.app/myjewellary/${user?.email}`)
       .then(response => {
         console.log(response.data);
         setData(response.data);
@@ -23,7 +23,7 @@ const MyJewellary = () => {
   const handleDelete = (id) => {
     console.log(id);
 
-    axios.delete(`http://localhost:5000/myjewellarydelete/${id}`)
+    axios.delete(`https://demo-theta-sepia.vercel.app/myjewellarydelete/${id}`)
       .then(res => {
         console.log(res.data);
         if (res.data.deletedCount > 0) {

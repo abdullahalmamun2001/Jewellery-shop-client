@@ -12,6 +12,8 @@ import AllJewellery from './components/Pages/AllJewellery/AllJewellery';
 import MyJewellary from './components/Pages/MyJewellary/MyJewellary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PrivateRoute from './Router/PrivateRoute';
+import DashHome from './components/DashBoard/DashHome/DashHome';
+import ManagedUser from './components/DashBoard/DashHome/ManagedUser/ManagedUser';
 
 
 const queryClient = new QueryClient()
@@ -29,11 +31,15 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
+        path: "/manage-user",
+        element: <ManagedUser></ManagedUser>,
+      },
+      {
         path: "/login",
         element: <Login></Login>,
       },
       {
-        path: "/addjewellery",
+        path: "/addJewellery",
         element: <Addjewellery></Addjewellery>,
       },
       {
@@ -44,8 +50,27 @@ const router = createBrowserRouter([
         path: "/myjewellery",
         element: <PrivateRoute><MyJewellary></MyJewellary></PrivateRoute>
       },
+      {
+        path:"/dashboard",
+        element:<DashHome></DashHome>,
+      },
     ]
   },
+  // {
+  //   path: '/dashboard',
+  //   element: <DashHome></DashHome>,
+  //   children: [
+  //     {
+  //       path: "/dashboard/manage-user",
+  //       element: <ManagedUser></ManagedUser>,
+  //     },
+  //     {
+  //       path: "/dashboard/addJewellery",
+  //       element: <Addjewellery></Addjewellery>,
+  //     },
+  //   ]
+  // },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

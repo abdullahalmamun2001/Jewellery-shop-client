@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Lottie from "lottie-react";
 import signUp from "./../../../../public/signup.json"
 
@@ -49,7 +49,7 @@ const Register = () => {
                         email, role: "user", name: name
                         , photo: image
                     };
-                    axios.post('http://localhost:5000/user',
+                    axios.post('https://demo-theta-sepia.vercel.app/user',
                         data
                     )
                         .then(res => {
@@ -120,6 +120,7 @@ const Register = () => {
                                 <button type='submit' className="btn btn-primary">Sign In</button>
                             </div>
                         </form>
+                        <p className='mx-5 my-2'>Already registered ? Please <Link to={"/login"} className='hover:text-black text-md fw-bold'>Login</Link></p>
                     </div>
                 </div>
             </div>

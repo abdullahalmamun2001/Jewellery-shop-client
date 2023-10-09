@@ -4,12 +4,12 @@ import SingleJewellery from './SingleJewellery';
 
 const AllJewellery = () => {
     const [jewellerys, setJewellerys] = useState([])
-    //     axios.get('/http://localhost:5000/alljewellery')
+    //     axios.get('/https://demo-theta-sepia.vercel.app/alljewellery')
     //   .then(function (response) {
     //     // handle success
     //     console.log(response);
 
-    axios.get('http://localhost:5000/alljewellery')
+    axios.get('https://demo-theta-sepia.vercel.app/alljewellery')
         .then(data => {
 
             setJewellerys(data.data);

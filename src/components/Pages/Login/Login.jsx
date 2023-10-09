@@ -2,10 +2,10 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Lottie from "lottie-react";
 import login from './../../../../public/login.json'
 import Swal from 'sweetalert2';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate=useNavigate();
@@ -30,7 +30,8 @@ const Login = () => {
                 }
                 console.log(loggedUser);
                 // navigate
-                navigate('/')
+                navigate('/');
+               
             })
             .catch(error=>{
                 if(error){
@@ -58,13 +59,15 @@ const Login = () => {
                         timer: 1500
                       })
                 }
+                navigate('/')
+                
                 const email=loggedUser.email;
                 const name=loggedUser.displayName;
                 
                 const data={email,name,role:"user"}
                 // save user information
 
-                axios.post('http://localhost:5000/user',
+                axios.post('https://demo-theta-sepia.vercel.app/user',
                 data
             )
             .then(res =>{
@@ -121,6 +124,7 @@ const Login = () => {
                                 <button className='btn bg-violet-300'><Icon className='text-3xl' icon="flat-color-icons:google" />Google</button>
                             </div>
                         </form>
+                        <p className='mx-5 my-2'>New user ? Please <Link to={"/register"} className='hover:text-black text-md fw-bold'>Register</Link></p>
                     </div>
                 </div>
             </div>

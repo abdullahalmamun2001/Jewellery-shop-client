@@ -17,7 +17,7 @@ const Addjewellery = () => {
         const newJewellery = { name, description, price, image,email };
         console.log(newJewellery);
         console.log(newJewellery);
-        fetch('http://localhost:5000/alljewellery ', {
+        fetch('https://demo-theta-sepia.vercel.app/alljewellery ', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -32,18 +32,19 @@ const Addjewellery = () => {
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',
-                        title: 'Your food has been added',
+                        title: 'Your jewellary has been added',
                         showConfirmButton: false,
                         timer: 1500
                     })
                 }
             })
+            form.reset();
 
     }
 
 
     return (
-        <div className="card w-[500px] mx-auto shadow-2xl bg-fuchsia-800">
+        <div className="card w-[500px] mx-auto shadow-2xl bg-fuchsia-800 mt-20">
             <h1 className="text-3xl text-center text-gray-700 p-4">This is a form add product</h1>
             <form onSubmit={handleAddForm}>
                 <div className="form-control">

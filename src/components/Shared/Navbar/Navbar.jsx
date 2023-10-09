@@ -1,25 +1,52 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../providers/AuthProvider';
 import useAdminSecure from '../../../hooks/UseAdminSecure';
 
 const Navbar = () => {
-  const { user, logOut,loading } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdminSecure();
-  if (isAdminLoading) {
-    <span className="loading loading-dots loading-lg"></span>
-  }
-  if (!user) {
-    <span className="loading loading-dots loading-lg"></span>
-  }
-  if (loading) {
-    <span className="loading loading-dots loading-lg"></span>
-  }
-  console.log(isAdmin);
+  const [admin, setAdmin] = useState("");
+
+  // console.log(isAdmin.adm);
+
+  // if (isAdminLoading) {
+  //   <span className="loading loading-dots loading-lg"></span>
+  // }
+  // if (!user) {
+  //   <span className="loading loading-dots loading-lg"></span>
+  // }
+  // if (loading) {
+  //   <span className="loading loading-dots loading-lg"></span>
+  // }
+  useEffect(() => {
+    fetch(`https://demo-theta-sepia.vercel.app/user/admin?email=${user?.email}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.admin);
+        setAdmin(data.admin);
+        // if(data.admin){
+        //   console.log('good');
+        // }else{
+        //   console.log('bad');
+        // }
+
+       
+        // if(data.admin==true){
+        //   setAdmin(true)
+        // }
+        // else{
+        //   setAdmin(false)
+        // }
+        // console.log(admin);
+      })
+  }, [user])
+  console.log();
+
 
   const handleLogOut = () => {
     logOut()
-      .then(result => { })
+      .then(result => {})
   }
   return (
     <div>
@@ -52,33 +79,37 @@ const Navbar = () => {
             <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/"}>Home</Link>
 
             {
-              user? <><Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/allJewellery"}>All Jewellery</Link>
-              <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/myJewellery"}>My Jewellery</Link></>:""
+              user ? <><Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/allJewellery"}>All Jewellery</Link>
+                <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/myJewellery"}>My Jewellery</Link></> : ""
             }
+
+
             {
-              isAdmin && <>
-              <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/addJewellery"}>Add Jewellery</Link>
-              <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/manage-user"}>Manage User</Link>
-              </>
+              admin ? <>
+                
+                <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/dashboard"}>DashBoard</Link>
+              </> : ""
             }
+
+
 
             {
               user ? "" : <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/register"}>Register</Link>
             }
             {
               user ? "" : <Link className='px-4 pt-3 text-lg fw-bold text-white' to={"/login"}>Login</Link>
-            }
-
+            } 
+            
 
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end ml-40 tooltip-bottom" data-tip={user?.displayName}>
             {
               user ? <>
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  <div className="w-10 rounded-full" >
+                    <img src={user?.photoURL} />
                   </div>
                 </label>
               </> : ""
