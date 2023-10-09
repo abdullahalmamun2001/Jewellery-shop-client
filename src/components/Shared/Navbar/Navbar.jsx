@@ -4,11 +4,17 @@ import { AuthContext } from '../../providers/AuthProvider';
 import useAdminSecure from '../../../hooks/UseAdminSecure';
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const [isAdmin,isAdminLoading]=useAdminSecure();
-  // if(isAdminLoading){
-    
-  // }
+  const { user, logOut,loading } = useContext(AuthContext);
+  const [isAdmin, isAdminLoading] = useAdminSecure();
+  if (isAdminLoading) {
+    <span className="loading loading-dots loading-lg"></span>
+  }
+  if (!user) {
+    <span className="loading loading-dots loading-lg"></span>
+  }
+  if (loading) {
+    <span className="loading loading-dots loading-lg"></span>
+  }
   console.log(isAdmin);
 
   const handleLogOut = () => {
@@ -42,11 +48,20 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
+
             <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/"}>Home</Link>
-            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/allJewellery"}>All Jewellery</Link>
-            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/myJewellery"}>My Jewellery</Link>
-            <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/addJewellery"}>Add Jewellery</Link>
-            
+
+            {
+              user? <><Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/allJewellery"}>All Jewellery</Link>
+              <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/myJewellery"}>My Jewellery</Link></>:""
+            }
+            {
+              isAdmin && <>
+              <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/addJewellery"}>Add Jewellery</Link>
+              <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/manage-user"}>Manage User</Link>
+              </>
+            }
+
             {
               user ? "" : <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/register"}>Register</Link>
             }
@@ -66,14 +81,14 @@ const Navbar = () => {
                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                   </div>
                 </label>
-                </> : ""
+              </> : ""
             }
             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
               <li>
                 {
                   user ? <Link className='text-lg fw-bold text-white' onClick={handleLogOut}>LogOut</Link> : ""
                 }
-                  <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/blog"}>Blog</Link>
+                <Link className='hover:text-red-400 px-4 pt-3 text-lg fw-bold text-white' to={"/blog"}>Blog</Link>
               </li>
             </ul>
           </div>

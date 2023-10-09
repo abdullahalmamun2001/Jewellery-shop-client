@@ -2,9 +2,13 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
-            <h1>Footer</h1>
-        </div>
+        <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
+            
+    
+            <aside>
+                <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+            </aside>
+        </footer>
     );
 };
 

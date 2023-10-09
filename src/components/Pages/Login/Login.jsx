@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Icon } from '@iconify/react';
-import { saveUser } from '../../../api/auth';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate=useNavigate();
     const { signIn, googleSignIn } = useContext(AuthContext)
     const handleLogin = (event) => {
         event.preventDefault();
@@ -16,7 +17,10 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                // navigate
+                navigate('/')
             })
+
     }
     const handleGoogleSignIn = () => {
         googleSignIn()

@@ -11,6 +11,7 @@ import Addjewellery from './components/DashBoard/AddJewellery';
 import AllJewellery from './components/Pages/AllJewellery/AllJewellery';
 import MyJewellary from './components/Pages/MyJewellary/MyJewellary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import PrivateRoute from './Router/PrivateRoute';
 
 
 const queryClient = new QueryClient()
@@ -37,11 +38,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/alljewellery",
-        element: <AllJewellery></AllJewellery>,
+        element: <PrivateRoute><AllJewellery></AllJewellery></PrivateRoute>,
       },
       {
         path: "/myjewellery",
-        element: <MyJewellary></MyJewellary>
+        element: <PrivateRoute><MyJewellary></MyJewellary></PrivateRoute>
       },
     ]
   },
